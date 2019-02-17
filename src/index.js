@@ -44,7 +44,10 @@ class Hello extends React.Component {
       <div className="wrap">
         {this.renderCount()}
         <button onClick={this.handleClick}>click me</button>  
-        <MdEditor value={mock_text} defaultShow="md" mdStyle={{color: '#fff'}} onChange={this.onEditorChange} />         
+        <MdEditor 
+          value={mock_text}
+          onChange={this.onEditorChange} 
+        />         
       </div>      
     )
   }
