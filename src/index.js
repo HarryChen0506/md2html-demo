@@ -1,61 +1,29 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import MdEditor from 'rc-md2html'
-import content  from './content.js'
+import Demo from './Demo'
 import './index.less'
 
-// const mock_content = "Hello.\n\n * This is markdown.\n * It is fun\n * Love it or leave it."
-const mock_content = content
-
-class Demo extends React.Component {
-
-  mdEditor = null
-
-  handleEditorChange = ({html, text}) => {
-    // console.log('handleEditorChange', text)
-  }
-
-  handleGetMdValue = () => {
-    if (this.mdEditor) {
-      alert(this.mdEditor.getMdValue())      
-    }
-  }
-
-  handleGetHtmlValue = () => {
-    if (this.mdEditor) {
-      alert(this.mdEditor.getHtmlValue())      
-    }
-  }
-
+class Home extends React.Component { 
   render () {
     return (
-      <div className="demo-wrap">
-        <h2 className="title">rc-md2html demo</h2>
-        <div className="editor-wrap">
-          <nav className="nav">
-            <button onClick={this.handleGetMdValue} >getMdValue</button>  
-            <button onClick={this.handleGetHtmlValue} >getHtmlValue</button>  
-          </nav>
-          <MdEditor 
-            ref={node => this.mdEditor = node}
-            value={mock_content}
-            style={{height: '500px', width: '100%'}}
-            config={{
-              view: {
-                menu: true,
-                md: true,
-                html: true
-              }
-            }}
-            onChange={this.handleEditorChange} 
-          />  
-        </div> 
+      <div className="page-wrap">
+        <div className="banner">
+          <h3 className="title">rc-md2html</h3>
+          <p className="decs">A React component for converting Markdown into HTML, light and powerful.</p>
+          <div className="link">
+            <a className="button-item github"><span className="icon-github"></span></a>
+            <a className="button-item"><span className="button">doc</span></a>            
+          </div> 
+        </div>
+        <div className="demo-wrap">
+          <Demo />
+        </div>        
       </div>      
     )
   }
 }
 
 ReactDOM.render(
-  <Demo />,
+  <Home />,
   document.getElementById('root')
 )
