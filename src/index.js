@@ -1,65 +1,61 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import MdEditor from 'rc-md2html'
-
+import content  from './content.js'
 import './index.less'
-// const mock_text = "Hello.\n\n * This is markdown.\n * It is fun\n * Love it or leave it."
-const mock_text = `
-  ### [Emojies](https://github.com/markdown-it/markdown-it-emoji)
 
-  > Classic markup: :wink: :crush: :cry: :tear: :laughing: :yum:
-  >
-  > Shortcuts (emoticons): :-) :-( 8-) ;)
+// const mock_content = "Hello.\n\n * This is markdown.\n * It is fun\n * Love it or leave it."
+const mock_content = content
 
-  see [how to change output](https://github.com/markdown-it/markdown-it-emoji#change-output) with twemoji.
-`
+class Demo extends React.Component {
 
-class Hello extends React.Component {
-  constructor (props) {
-    super(props)
-    this.handleClick = this.handleClick.bind(this)
-    this.state = {
-      count: 1
+  mdEditor = null
+
+  handleEditorChange = ({html, text}) => {
+    // console.log('handleEditorChange', text)
+  }
+
+  handleGetMdValue = () => {
+    if (this.mdEditor) {
+      alert(this.mdEditor.getMdValue())      
     }
-  } 
-  
-  handleClick (e) {
-    // console.log('click me', e)
-    const count = this.state.count
-    this.setState({
-      count: count + 1
-    })
   }
 
-  renderCount () {    
-    return <span name="span">{this.state.count}</span>       
-  }
-
-  onEditorChange ({html, text, show}) {    
-    console.log('onEditorChange', html, text, show)
+  handleGetHtmlValue = () => {
+    if (this.mdEditor) {
+      alert(this.mdEditor.getHtmlValue())      
+    }
   }
 
   render () {
     return (
-      <div className="wrap">
-        {this.renderCount()}
-        <button onClick={this.handleClick}>click me</button>  
-        <MdEditor 
-          value={mock_text}
-          onChange={this.onEditorChange} 
-        />         
+      <div className="demo-wrap">
+        <h2 className="title">rc-md2html demo</h2>
+        <div className="editor-wrap">
+          <nav className="nav">
+            <button onClick={this.handleGetMdValue} >getMdValue</button>  
+            <button onClick={this.handleGetHtmlValue} >getHtmlValue</button>  
+          </nav>
+          <MdEditor 
+            ref={node => this.mdEditor = node}
+            value={mock_content}
+            style={{height: '500px', width: '100%'}}
+            config={{
+              view: {
+                menu: true,
+                md: true,
+                html: true
+              }
+            }}
+            onChange={this.handleEditorChange} 
+          />  
+        </div> 
       </div>      
     )
   }
 }
 
-const Demo = (
-  <div className={'title'} key={'title'}>
-    <Hello name="harry"/>    
-  </div>
-)
-
 ReactDOM.render(
-  Demo,
+  <Demo />,
   document.getElementById('root')
 )
