@@ -7,7 +7,7 @@ const config = {
     app: './src/index.js',
   },
   output: {
-    filename: 'index.js',
+    filename: '[name].[hash].js',
     path: path.resolve(__dirname, 'dist'),
   },  
   mode: 'production',
