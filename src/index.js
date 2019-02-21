@@ -9,7 +9,7 @@ class Home extends React.Component {
       <div className="page-wrap">
         <div className="banner">
           <h3 className="title">rc-md2html</h3>
-          <p className="decs">A React component for converting Markdown into HTML, light and powerful...</p>
+          <p className="decs">A light-weight Markdown editor based on markdown-it and React</p>
           <div className="link">
             <a className="button-item github" href="https://github.com/HarryChen0506/rc-md2html" target="_blank">
               <span className="icon icon-github"></span>
