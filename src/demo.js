@@ -1,5 +1,5 @@
 import React from 'react'
-import MdEditor from 'rc-md2html'
+import MdEditor from 'react-markdown-editor-lite'
 import content  from './content.js'
 import './demo.less'
 
