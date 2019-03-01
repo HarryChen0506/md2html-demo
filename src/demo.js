@@ -36,13 +36,14 @@ class Demo extends React.Component {
         <MdEditor 
           ref={node => this.mdEditor = node}
           value={mock_content}
-          style={{height: '400px', width: '100%'}}
+          style={{height: '500px', width: '100%'}}
           config={{
             view: {
               menu: true,
               md: true,
               html: true
-            }
+            },
+            // synchScroll: false
           }}
           onChange={this.handleEditorChange} 
         />  
