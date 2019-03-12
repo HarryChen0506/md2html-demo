@@ -31,7 +31,13 @@ class Demo extends React.Component {
       setTimeout(() => {
         // setTimeout 模拟oss异步上传图片
         // 当oss异步上传获取图片地址后，执行calback回调（参数为imageUrl字符串），即可将图片地址写入markdown
-        callback('https://avatars0.githubusercontent.com/u/21263805?s=40&v=4')
+        const imageList = [
+          'https://www.baidu.com/img/bd_logo1.png?qua=high',
+          'https://mat1.gtimg.com/pingjs/ext2020/qqindex2018/dist/img/qq_logo_2x.png',
+          'https://avatars0.githubusercontent.com/u/21263805'
+        ]
+        const imageUrl = imageList[Math.floor(Math.random() * imageList.length)]
+        callback(imageUrl)
       }, 1000)
     }
     reader.readAsDataURL(file)
