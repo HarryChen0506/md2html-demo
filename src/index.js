@@ -9,7 +9,7 @@ class Home extends React.Component {
       <div className="page-wrap">
         <div className="banner">
           <h3 className="title">react-markdown-editor-lite</h3>
-          <p className="decs">A light-weight Markdown editor based on markdown-it and React</p>
+          <p className="decs">A light-weight Markdown editor based on React</p>
           <div className="link">
             <a className="button-item github" href="https://github.com/HarryChen0506/react-markdown-editor-lite" target="_blank">
               <span className="icon icon-github"></span>
