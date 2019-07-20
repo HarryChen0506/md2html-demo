@@ -13,11 +13,12 @@ import tasklists from 'markdown-it-task-lists'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/atom-one-light.css'
 // import 'highlight.js/styles/github.css'
-import content  from './content.js'
+import content from './content.js'
+import content1 from './content.1.js'
 import './demo.less'
 
 // const mock_content = "Hello.\n\n * This is markdown.\n * It is fun\n * Love it or leave it."
-const MOCK_DATA = content
+const MOCK_DATA = [content, content1]
 
 class Demo extends React.Component {
   constructor(props) {
@@ -30,32 +31,36 @@ class Demo extends React.Component {
         if (lang && hljs.getLanguage(lang)) {
           try {
             return hljs.highlight(lang, str).value
-          } catch (__) {}
-        }    
+          } catch (__) { }
+        }
         return '' // use external default escaping
       }
     })
-    .use(emoji)
-    .use(subscript)
-    .use(superscript)
-    .use(footnote)
-    .use(deflist)
-    .use(abbreviation)
-    .use(insert)
-    .use(mark)
-    .use(tasklists, { enabled: this.taskLists })
+      .use(emoji)
+      .use(subscript)
+      .use(superscript)
+      .use(footnote)
+      .use(deflist)
+      .use(abbreviation)
+      .use(insert)
+      .use(mark)
+      .use(tasklists, { enabled: this.taskLists })
   }
   mdParser = null
   mdEditor = null
 
-  handleEditorChange = ({html, text}) => {
+  state = {
+    content: MOCK_DATA[1]
+  }
+
+  handleEditorChange = ({ html, text }) => {
     // console.log('handleEditorChange', text)
   }
 
   handleImageUpload = (file, callback) => {
     const reader = new FileReader()
-    reader.onload = () => {      
-      const convertBase64UrlToBlob = (urlData) => {  
+    reader.onload = () => {
+      const convertBase64UrlToBlob = (urlData) => {
         let arr = urlData.split(','), mime = arr[0].match(/:(.*?);/)[1]
         let bstr = atob(arr[1])
         let n = bstr.length
@@ -63,7 +68,7 @@ class Demo extends React.Component {
         while (n--) {
           u8arr[n] = bstr.charCodeAt(n)
         }
-        return new Blob([u8arr], {type:mime})
+        return new Blob([u8arr], { type: mime })
       }
       const blob = convertBase64UrlToBlob(reader.result)
       setTimeout(() => {
@@ -92,29 +97,42 @@ class Demo extends React.Component {
     })
   }
 
+  handleSetContent = (type = 0) => {
+    this.setState({
+      content: MOCK_DATA[type]
+    })
+  }
+
   handleGetMdValue = () => {
     if (this.mdEditor) {
-      alert(this.mdEditor.getMdValue())      
+      alert(this.mdEditor.getMdValue())
     }
   }
 
   handleGetHtmlValue = () => {
     if (this.mdEditor) {
-      alert(this.mdEditor.getHtmlValue())      
+      alert(this.mdEditor.getHtmlValue())
     }
   }
 
-  render () {
-    return (    
+  render() {
+    const { content } = this.state
+    return (
       <div className="editor-wrap">
         <nav className="nav">
-          <button onClick={this.handleGetMdValue} >getMdValue</button>  
-          <button onClick={this.handleGetHtmlValue} >getHtmlValue</button>  
+          <div className="left">
+            <button onClick={this.handleSetContent.bind(this, 1)} >README</button>
+            <button onClick={this.handleSetContent.bind(this, 0)} >DEMO</button>
+          </div>
+          <div className="right">
+            <button onClick={this.handleGetMdValue} >API.getMdValue</button>
+            <button onClick={this.handleGetHtmlValue} >API.getHtmlValue</button>
+          </div>
         </nav>
-        <MdEditor 
+        <MdEditor
           ref={node => this.mdEditor = node}
-          value={MOCK_DATA}
-          style={{height: '450px', width: '100%'}}
+          value={content}
+          style={{ height: '450px', width: '100%' }}
           config={{
             view: {
               menu: true,
@@ -126,8 +144,8 @@ class Demo extends React.Component {
           renderHTML={this.renderHTML}
           onChange={this.handleEditorChange}
           onImageUpload={this.handleImageUpload}
-        />  
-      </div> 
+        />
+      </div>
     )
   }
 }
