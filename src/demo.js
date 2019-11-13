@@ -1,6 +1,6 @@
 import React from 'react'
 import MdEditor from 'react-markdown-editor-lite'
-import MarkdownIt from 'markdown-it';
+import MarkdownIt from 'markdown-it'
 import emoji from 'markdown-it-emoji'
 import subscript from 'markdown-it-sub'
 import superscript from 'markdown-it-sup'
