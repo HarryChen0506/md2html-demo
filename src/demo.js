@@ -97,6 +97,14 @@ class Demo extends React.Component {
     })
   }
 
+  onBeforeClear = () => {
+    return new Promise((resolve, reject) => {
+      const result = window.confirm('Are you sure you want to clear your markdown :-)')
+      const toClear = result ? true : false
+      resolve(toClear)
+    })
+  }
+
   handleSetContent = (type = 0) => {
     this.setState({
       content: MOCK_DATA[type]
@@ -137,13 +145,15 @@ class Demo extends React.Component {
             view: {
               menu: true,
               md: true,
-              html: true
+              html: true,
+              fullScreen: true
             },
-            // synchScroll: false
+            // syncScrollMode: ['rightFollowLeft']
           }}
           renderHTML={this.renderHTML}
           onChange={this.handleEditorChange}
           onImageUpload={this.handleImageUpload}
+          onBeforeClear={this.onBeforeClear}
         />
       </div>
     )
