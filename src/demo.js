@@ -1,5 +1,7 @@
 import React from 'react'
 import MdEditor from 'react-markdown-editor-lite'
+// import MdEditor from 'react-markdown-editor-lite/lib/index.nostyle'
+// import 'react-markdown-editor-lite/lib/index.css'
 import MarkdownIt from 'markdown-it'
 import emoji from 'markdown-it-emoji'
 import subscript from 'markdown-it-sub'
@@ -105,6 +107,13 @@ class Demo extends React.Component {
     })
   }
 
+  onCustomImageUpload = () => {
+    return new Promise((resolve, reject) => {
+      const result = window.prompt('Please enter image url here')
+      resolve({ url: result })
+    })
+  }
+
   handleSetContent = (type = 0) => {
     this.setState({
       content: MOCK_DATA[type]
@@ -153,6 +162,7 @@ class Demo extends React.Component {
           renderHTML={this.renderHTML}
           onChange={this.handleEditorChange}
           onImageUpload={this.handleImageUpload}
+          // onCustomImageUpload={this.onCustomImageUpload}
           onBeforeClear={this.onBeforeClear}
         />
       </div>
