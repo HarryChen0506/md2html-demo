@@ -17,6 +17,7 @@ import 'highlight.js/styles/atom-one-light.css'
 // import 'highlight.js/styles/github.css'
 import content from './content.js'
 import content1 from './content.1.js'
+import 'react-markdown-editor-lite/lib/index.css'
 import './demo.less'
 
 // const mock_content = "Hello.\n\n * This is markdown.\n * It is fun\n * Love it or leave it."
