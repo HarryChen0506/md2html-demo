@@ -7,13 +7,14 @@ const content =  `
 ### 预览
 在线体验 [https://harrychen0506.github.io/react-markdown-editor-lite/](https://harrychen0506.github.io/react-markdown-editor-lite/)
 
-![image](https://github.com//HarryChen0506/react-markdown-editor-lite/blob/master/example/react-markdown-editor-lite-v-0-3-6.PNG?raw=true)
+![image](https://github.com//HarryChen0506/react-markdown-editor-lite/blob/master/image/react-markdown-editor-lite-v1.0.0.PNG?raw=true)
 
 ### 特点
 * 轻量、基于React
 * UI可配置, 如只显示编辑区或预览区
 * 支持自定义markdown语法解析器,语法高亮等
 * 支持常用的markdown编辑功能，如加粗，斜体等等...
+* 支持功能按钮插巴化，用户可以自定义扩展组件
 * 支持编辑区和预览区同步滚动
 
 ### 开发心得

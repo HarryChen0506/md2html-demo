@@ -57,9 +57,22 @@ class Demo extends React.Component {
   }
 
   handleEditorChange = ({ html, text }) => {
-    // console.log('handleEditorChange', text)
+    console.log('handleEditorChange', text, html)
   }
 
+  renderHTML = (text) => {
+    // 模拟异步渲染Markdown
+    // return () => {
+    //   return this.mdParser.render(text)
+    // }
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(this.mdParser.render(text))
+      }, 0)
+    })
+  }
+
+  /* 
   handleImageUpload = (file, callback) => {
     const reader = new FileReader()
     reader.onload = () => {
@@ -88,25 +101,19 @@ class Demo extends React.Component {
     }
     reader.readAsDataURL(file)
   }
-  renderHTML = (text) => {
-    // 模拟异步渲染Markdown
-    // return () => {
-    //   return this.mdParser.render(text)
-    // }
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(this.mdParser.render(text))
-      }, 0)
-    })
-  }
+  */
+  
+  handleImageUpload = (file) => {
+    return new Promise(resolve => {
+      const reader = new FileReader();
+      reader.onload = data => {
+        // @ts-ignore
+        resolve(data.target.result);
+      };
+      reader.readAsDataURL(file);
+    });
+  };
 
-  onBeforeClear = () => {
-    return new Promise((resolve, reject) => {
-      const result = window.confirm('Are you sure you want to clear your markdown :-)')
-      const toClear = result ? true : false
-      resolve(toClear)
-    })
-  }
 
   onCustomImageUpload = () => {
     return new Promise((resolve, reject) => {
@@ -158,13 +165,12 @@ class Demo extends React.Component {
               html: true,
               fullScreen: true
             },
-            // syncScrollMode: ['rightFollowLeft']
+            syncScrollMode: ['rightFollowLeft']
           }}
           renderHTML={this.renderHTML}
           onChange={this.handleEditorChange}
           onImageUpload={this.handleImageUpload}
           // onCustomImageUpload={this.onCustomImageUpload}
-          onBeforeClear={this.onBeforeClear}
         />
       </div>
     )
