@@ -58,6 +58,9 @@ class Demo extends React.Component {
 
   handleEditorChange = ({ html, text }) => {
     console.log('handleEditorChange', text, html)
+    this.setState({
+      content: text
+    })
   }
 
   renderHTML = (text) => {
